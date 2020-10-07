@@ -6,7 +6,8 @@
       "serve": "vue-cli-service serve",
       "build": "vue-cli-service build",
       "lint": "vue-cli-service lint",
-      "prettier": "prettier -c \"./**/*.vue\" --write"
+      "prettier": "prettier -c \"./**/*.vue\" --write",
+      "test:unit": "jest"
    },
    "dependencies": {
       "core-js": "^2.6.5",
@@ -15,17 +16,24 @@
       "vue": "^2.6.10"
    },
    "devDependencies": {
+      "@babel/core": "^7.11.6",
+      "@babel/preset-env": "^7.11.5",
       "@vue/cli-plugin-babel": "^3.0.3",
       "@vue/cli-plugin-eslint": "^3.0.3",
       "@vue/cli-service": "^3.0.3",
+      "@vue/test-utils": "^1.1.0",
+      "babel-core": "^7.0.0-bridge.0",
       "babel-eslint": "^10.0.1",
+      "babel-jest": "^26.5.2",
       "eslint": "^5.16.0",
       "eslint-plugin-vue": "^5.0.0",
       "husky": "^4.3.0",
+      "jest": "^26.5.2",
       "lint-staged": "^10.4.0",
       "node-sass": "^4.12.0",
       "prettier": "^2.1.2",
       "sass-loader": "^8.0.0",
+      "vue-jest": "^3.0.7",
       "vue-template-compiler": "^2.6.10"
    },
    "lint-staged": {
