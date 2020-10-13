@@ -14,6 +14,7 @@ export default {
    }),
 
    props: {
+      darkMode: { type: Boolean, default: false },
       note: { type: Object, default: () => ({}) },
    },
 
@@ -37,7 +38,10 @@ export default {
             passed into the listener’s callback function.
          -->
          <input
-            class="name"
+            :class="{
+               name: true,
+               'name--light-mode': !darkMode,
+            }"
             @input="(e) => $emit('name', e)"
             :value="note.name"
          />
@@ -47,9 +51,13 @@ export default {
       <PreviewControls
          :mode="previewMode"
          v-on:modeChange="onControlsChange"
+         :dark-mode="darkMode"
       ></PreviewControls>
 
       <textarea
+         :class="{
+            'textarea--light-mode': !darkMode,
+         }"
          v-if="previewMode === 'plaintext'"
          @input="(e) => $emit('content', e)"
          :value="note.content"
@@ -57,7 +65,10 @@ export default {
       />
 
       <div
-         :class="{ 'markdown-body': true }"
+         :class="{ 
+            'markdown-body': true ,
+            'markdown-body--light-mode': !darkMode
+         }"
          v-if="previewMode === 'markdown'"
          v-html="getMarkdownPreview()"
       ></div>
@@ -85,13 +96,18 @@ $controls-height: 31px;
          background: transparent;
          border: none;
          outline: none;
-         border-bottom: 1px solid #323231;
+         border-bottom: 1px solid #f5f5f5;
          margin-bottom: 6px;
          font-size: 26px;
          color: #f5f5f5;
 
          @media (max-width: 750px) {
             width: 100%;
+         }
+
+         &--light-mode {
+            border-bottom: 1px solid #323231;
+            color: #323231;
          }
       }
 
@@ -103,13 +119,17 @@ $controls-height: 31px;
       }
    }
 
-   textarea {
+   .textarea {
       height: calc(100% - #{$header-height} - #{$controls-height});
       width: 100%;
       background: #212121;
       border: none;
       outline: none;
       color: #f5f5f5;
+
+      &--light-mode {
+         border: 1px solid #212121;
+      }
    }
 
    .markdown-body {

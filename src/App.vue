@@ -21,12 +21,13 @@ export default {
    // Data: It is the container of variables, which may be accessible from the view => data: {}
    // When working with components, it changes to the function format => data(){}
    data: () => ({
+      navOpen: false,
       notes: [],
+      darkMode: true,
+      interval: '',
+      saved: true,
       search: '',
       selected: 0,
-      saved: true,
-      navOpen: false,
-      interval: '',
    }),
 
    // Properties calculated based on established logic. They are declared as functions.
@@ -106,17 +107,57 @@ export default {
 </script>
 
 <template>
-   <div id="app">
+   <div
+      :class="{
+         'app': true,
+         'app--light-mode': !darkMode,
+      }"
+   >
       <header class="header">
-         <div :class="['menu', { navOpen }]" @click="navOpen = !navOpen">&#10095;</div>
-         <div class="title">Simple Notes</div>
-         <div class="last-saved val">{{ saved ? 'Saved' : 'Unsaved' }}</div>
+         <div :class="['menu', { navOpen }]" @click="navOpen = !navOpen">
+            &#10095;
+         </div>
+         <div
+            :class="{
+               title: true,
+               'title--light-mode': !darkMode,
+            }"
+         >
+            Simple Notes
+         </div>
+         <div class="last-saved-and-toggle">
+            <div class="last-saved val">{{ saved ? 'Saved' : 'Unsaved' }}</div>
+            <button
+               :class="{
+                  'theme-toggle': true,
+                  'theme-toggle--light-mode': !darkMode,
+               }"
+               @keydown.enter="darkMode = !darkMode"
+               @click="darkMode = !darkMode"
+            >
+               {{ darkMode ? 'Light Mode' : 'Dark Mode' }}
+            </button>
+         </div>
       </header>
 
       <div class="body">
-         <section :class="['nav', { navOpen }]">
+         <section
+            :class="[
+               'nav',
+               {
+                  navOpen,
+                  'nav--light-mode': !darkMode,
+               },
+            ]"
+         >
             <div class="search">
-               <input placeholder="Search" v-model="search" />
+               <input
+                  :class="{
+                     'light-mode': !darkMode,
+                  }"
+                  placeholder="Search"
+                  v-model="search"
+               />
                <div class="new-note" @click="newNote">+</div>
             </div>
 
@@ -134,6 +175,7 @@ export default {
 
          <section class="window">
             <NoteEdit
+               :dark-mode="darkMode"
                :note="notes[selected]"
                @name="(e) => editNote('name', e)"
                @content="(e) => editNote('content', e)"
@@ -148,7 +190,7 @@ $dark: #323231;
 $darker: #212121;
 $white: #f5f5f5;
 
-#app {
+.app {
    height: 100vh;
    max-height: 100vh;
    width: 100%;
@@ -159,6 +201,11 @@ $white: #f5f5f5;
    -moz-osx-font-smoothing: grayscale;
    text-align: center;
    color: $white;
+
+   &--light-mode {
+      background: $white;
+      color: $dark;
+   }
 }
 
 .header {
@@ -192,11 +239,32 @@ $white: #f5f5f5;
       font-size: 12px;
    }
 
+   .last-saved-and-toggle {
+      align-items: center;
+      display: flex;
+   }
+
+   .theme-toggle {
+      background: none;
+      border: 1px solid $white;
+      color: $white;
+      cursor: pointer;
+      font-weight: 600;
+      margin-left: 16px;
+
+      &--light-mode {
+         border: 1px solid $dark;
+         color: $dark;
+      }
+   }
+
    @media (max-width: 750px) {
       .menu {
          display: flex;
+         flex: none;
          justify-content: flex-start;
          align-items: center;
+
          &.navOpen {
             justify-content: flex-end;
             transform: rotate(180deg);
@@ -225,6 +293,10 @@ $white: #f5f5f5;
       z-index: 9;
       box-shadow: 3px 0px 5px rgba(0, 0, 0, 0.25);
 
+      &--light-mode {
+         background: $white;
+      }
+
       .search {
          height: 26px;
          width: 100%;
@@ -244,6 +316,11 @@ $white: #f5f5f5;
             &:focus {
                border: 1px solid #888888;
             }
+         }
+
+         .light-mode {
+            background: $white;
+            color: $dark;
          }
 
          .new-note {
@@ -299,5 +376,10 @@ $white: #f5f5f5;
          width: 100%;
       }
    }
+}
+
+.light-mode {
+   background: $white;
+   color: $dark;
 }
 </style>
