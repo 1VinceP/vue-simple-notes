@@ -112,12 +112,7 @@ export default {
          <div :class="['menu', { navOpen }]" @click="navOpen = !navOpen">
             &#10095;
          </div>
-         <div
-            :class="{
-               title: true,
-               'title--light-mode': !darkMode,
-            }"
-         >
+         <div :class="['title', { 'title--light-mode': !darkMode }]">
             Simple Notes
          </div>
          <div class="last-saved-and-toggle">
