@@ -56,6 +56,7 @@ export default {
 
       <textarea
          :class="{
+            'textarea': true,
             'textarea--light-mode': !darkMode,
          }"
          v-if="previewMode === 'plaintext'"
@@ -129,6 +130,8 @@ $controls-height: 31px;
 
       &--light-mode {
          border: 1px solid #212121;
+         background: #f5f5f5;
+         color: #212121;
       }
    }
 
