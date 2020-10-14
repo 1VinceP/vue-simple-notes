@@ -123,10 +123,10 @@ export default {
          <div class="last-saved-and-toggle">
             <div class="last-saved val">{{ saved ? 'Saved' : 'Unsaved' }}</div>
             <button
-               :class="{
-                  'theme-toggle': true,
-                  'theme-toggle--light-mode': !darkMode,
-               }"
+               :class="[
+                  'theme-toggle',
+                  { 'theme-toggle--light-mode': !darkMode },
+               ]"
                @keydown.enter="darkMode = !darkMode"
                @click="darkMode = !darkMode"
             >
@@ -150,20 +150,10 @@ export default {
       </header>
 
       <div class="body">
-         <section
-            :class="[
-               'nav',
-               {
-                  navOpen,
-                  'nav--light-mode': !darkMode,
-               },
-            ]"
-         >
+         <section :class="['nav', { navOpen, 'nav--light-mode': !darkMode }]">
             <div class="search">
                <input
-                  :class="{
-                     'light-mode': !darkMode,
-                  }"
+                  :class="{ 'light-mode': !darkMode }"
                   placeholder="Search"
                   v-model="search"
                />

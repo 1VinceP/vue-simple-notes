@@ -38,10 +38,7 @@ export default {
             passed into the listener’s callback function.
          -->
          <input
-            :class="{
-               name: true,
-               'name--light-mode': !darkMode,
-            }"
+            :class="['name', { 'name--light-mode': !darkMode }]"
             @input="(e) => $emit('name', e)"
             :value="note.name"
          />
@@ -55,10 +52,7 @@ export default {
       ></PreviewControls>
 
       <textarea
-         :class="{
-            'textarea': true,
-            'textarea--light-mode': !darkMode,
-         }"
+         :class="['textarea', { 'textarea--light-mode': !darkMode }]"
          v-if="previewMode === 'plaintext'"
          @input="(e) => $emit('content', e)"
          :value="note.content"
@@ -66,10 +60,7 @@ export default {
       />
 
       <div
-         :class="{ 
-            'markdown-body': true ,
-            'markdown-body--light-mode': !darkMode
-         }"
+         :class="['markdown-body', { 'markdown-body--light-mode': !darkMode }]"
          v-if="previewMode === 'markdown'"
          v-html="getMarkdownPreview()"
       ></div>

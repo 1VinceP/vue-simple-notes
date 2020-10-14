@@ -19,21 +19,25 @@ export default {
    <div class="controls">
       <button
          @click="changePreviewMode('plaintext')"
-         :class="{
-            active: mode === 'plaintext',
-            'control-btn': true,
-            'control-btn--light-mode': !darkMode,
-         }"
+         :class="[
+            'control-btn',
+            {
+               active: mode === 'plaintext',
+               'control-btn--light-mode': !darkMode,
+            },
+         ]"
       >
          Plaintext
       </button>
       <button
          @click="changePreviewMode('markdown')"
-         :class="{
-            active: mode === 'markdown',
-            'control-btn': true,
-            'control-btn--light-mode': !darkMode,
-         }"
+         :class="[
+            'control-btn',
+            {
+               active: mode === 'markdown',
+               'control-btn--light-mode': !darkMode,
+            },
+         ]"
       >
          Markdown
       </button>
