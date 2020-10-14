@@ -107,12 +107,7 @@ export default {
 </script>
 
 <template>
-   <div
-      :class="{
-         'app': true,
-         'app--light-mode': !darkMode,
-      }"
-   >
+   <div :class="['app', { 'app--light-mode': !darkMode }]">
       <header class="header">
          <div :class="['menu', { navOpen }]" @click="navOpen = !navOpen">
             &#10095;
@@ -158,7 +153,12 @@ export default {
                   placeholder="Search"
                   v-model="search"
                />
-               <div class="new-note" @click="newNote">+</div>
+               <div
+                  :class="['new-note', { 'new-note--light-mode': !darkMode }]"
+                  @click="newNote"
+               >
+                  +
+               </div>
             </div>
 
             <div class="notes">
@@ -336,6 +336,16 @@ $white: #f5f5f5;
             }
             &:active {
                background: rgba(255, 255, 255, 0.12);
+            }
+
+            &--light-mode {
+               &:hover {
+                  background: rgba(250, 165, 0, 0.5);
+               }
+
+               &:active {
+                  background: rgba(250, 165, 0, 0.21);
+               }
             }
          }
       }
