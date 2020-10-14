@@ -132,6 +132,20 @@ export default {
             >
                {{ darkMode ? 'Light Mode' : 'Dark Mode' }}
             </button>
+            <div class="mobile-theme-toggle">
+               <div v-if="darkMode" @click="darkMode = !darkMode">
+                  <img
+                     class="mobile-theme-toggle__icon"
+                     src="@/assets/sun.png"
+                  />
+               </div>
+               <div v-else @click="darkMode = !darkMode">
+                  <img
+                     class="mobile-theme-toggle__icon"
+                     src="@/assets/crescent-moon.png"
+                  />
+               </div>
+            </div>
          </div>
       </header>
 
@@ -247,6 +261,7 @@ $white: #f5f5f5;
    .theme-toggle {
       background: none;
       border: 1px solid $white;
+      border-radius: 3px;
       color: $white;
       cursor: pointer;
       font-weight: 600;
@@ -255,6 +270,25 @@ $white: #f5f5f5;
       &--light-mode {
          border: 1px solid $dark;
          color: $dark;
+      }
+
+      @media (max-width: 750px) {
+         display: none;
+      }
+   }
+
+   .mobile-theme-toggle {
+      @media (min-width: 750px) {
+         display: none;
+      }
+
+      &__icon {
+         background-position: center;
+         background-repeat: no-repeat;
+         background-size: cover;
+         height: 20px;
+         margin: 0 auto;
+         width: 20px;
       }
    }
 
