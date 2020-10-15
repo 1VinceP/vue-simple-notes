@@ -53,6 +53,13 @@ export default {
       } else {
          localStorage.setItem('simple-notes', JSON.stringify([]));
       }
+
+      const isDark = JSON.parse(localStorage.getItem('notes-dark'));
+      if (isDark !== undefined) {
+         this.darkMode = isDark;
+      } else {
+         localStorage.setItem('notes-dark', 'true');
+      }
    },
 
    /*
@@ -102,6 +109,12 @@ export default {
             this.save();
          }
       },
+
+      toggleDarkMode() {
+         const newTheme = !this.darkMode;
+         this.darkMode = newTheme;
+         (localStorage.setItem('notes-dark', JSON.stringify(newTheme)));
+      },
    },
 };
 </script>
@@ -122,19 +135,19 @@ export default {
                   'theme-toggle',
                   { 'theme-toggle--light-mode': !darkMode },
                ]"
-               @keydown.enter="darkMode = !darkMode"
-               @click="darkMode = !darkMode"
+               @keydown.enter="toggleDarkMode"
+               @click="toggleDarkMode"
             >
                {{ darkMode ? 'Light Mode' : 'Dark Mode' }}
             </button>
             <div class="mobile-theme-toggle">
-               <div v-if="darkMode" @click="darkMode = !darkMode">
+               <div v-if="darkMode" @click="toggleDarkMode">
                   <img
                      class="mobile-theme-toggle__icon"
                      src="@/assets/sun.png"
                   />
                </div>
-               <div v-else @click="darkMode = !darkMode">
+               <div v-else @click="toggleDarkMode">
                   <img
                      class="mobile-theme-toggle__icon"
                      src="@/assets/crescent-moon.png"
@@ -187,7 +200,7 @@ export default {
 <style lang="scss">
 $dark: #323231;
 $darker: #212121;
-$white: #f5f5f5;
+$white: #efefef;
 
 .app {
    height: 100vh;

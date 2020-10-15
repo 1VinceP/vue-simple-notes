@@ -88,10 +88,10 @@ $controls-height: 31px;
          background: transparent;
          border: none;
          outline: none;
-         border-bottom: 1px solid #f5f5f5;
+         border-bottom: 1px solid #efefef;
          margin-bottom: 6px;
          font-size: 26px;
-         color: #f5f5f5;
+         color: #efefef;
 
          @media (max-width: 750px) {
             width: 100%;
@@ -117,11 +117,10 @@ $controls-height: 31px;
       background: #212121;
       border: none;
       outline: none;
-      color: #f5f5f5;
+      color: #efefef;
 
       &--light-mode {
-         border: 1px solid #212121;
-         background: #f5f5f5;
+         background: #efefef;
          color: #212121;
       }
    }
