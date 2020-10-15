@@ -3,6 +3,7 @@ export default {
    name: 'preview-controls',
 
    props: {
+      darkMode: { type: Boolean, default: false },
       mode: { type: String, default: () => 'plaintext' },
    },
 
@@ -18,15 +19,25 @@ export default {
    <div class="controls">
       <button
          @click="changePreviewMode('plaintext')"
-         :class="{ active: mode === 'plaintext' }"
-         class="control-btn"
+         :class="[
+            'control-btn',
+            {
+               active: mode === 'plaintext',
+               'control-btn--light-mode': !darkMode,
+            },
+         ]"
       >
          Plaintext
       </button>
       <button
          @click="changePreviewMode('markdown')"
-         :class="{ active: mode === 'markdown' }"
-         class="control-btn"
+         :class="[
+            'control-btn',
+            {
+               active: mode === 'markdown',
+               'control-btn--light-mode': !darkMode,
+            },
+         ]"
       >
          Markdown
       </button>
@@ -62,6 +73,17 @@ export default {
    &:hover {
       background: #fff;
       color: #212121;
+   }
+
+   &--light-mode {
+      color: #212121;
+      border: 1px solid #212121;
+
+      &.active,
+      &:hover {
+         background: #212121;
+         color: #fff;
+      }
    }
 }
 </style>

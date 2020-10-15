@@ -1,3 +1,4 @@
+$dark: #323231;
 $link-color: #ffa705;
 $header-color: #fff;
 $text-color: #e1e1e1;
@@ -8,6 +9,10 @@ $code-color: #fff;
   font-family: sans-serif;
   font-size: 1rem;
   line-height: 1.4;
+
+  &--light-mode {
+    color: $dark;
+  }
 
   a {
     color: $link-color;
